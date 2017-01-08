@@ -8,6 +8,7 @@
 
 # Vars.
 VM=MiCloud
+HOST_INTERFACE="${1:-"en0"}"
 
 # Check if the VM exists (before we set -e
 VBoxManage list vms | grep \""${VM}"\" &> /dev/null
@@ -31,11 +32,10 @@ launchctl load ~/Library/LaunchAgents/com.docker.machine.default.plist
 # Set up networking
 echo "Enabling bridged network interface"
 docker-machine stop "$VM"
-VBoxManage modifyvm "$VM" --nic3 bridged --bridgeadapter3 en0 --nictype3 82540EM --cableconnected3 on
+VBoxManage modifyvm "$VM" --nic3 bridged --bridgeadapter3 "$HOST_INTERFACE" --nictype3 82540EM --cableconnected3 on
 docker-machine start "$VM"
 
 # Start and Init docker-compose services
 cd "$BASEDIR"
 eval $(docker-machine env "$VM")
 docker-compose up -d --build
-
