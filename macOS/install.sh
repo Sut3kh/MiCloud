@@ -2,29 +2,40 @@
 ##
 # Install MiCloud on macOS.
 #
-# Start default docker-machine on boot and start the services in docker-compose.yml.
+# Create and start docker-machine on boot and start the services in docker-compose.yml.
 # Assumes docker-machine and docker-compose are installed and using Virtualbox (i.e. docker toolbox).
-# The default docker-machine must have been created (i.e. docker quick start terminal ran once).
 ##
 
-# Failure is not an option.
-set -e
+# Vars.
+VM=MiCloud
+
+# Check if the VM exists (before we set -e
+VBoxManage list vms | grep \""${VM}"\" &> /dev/null
+VM_EXISTS_CODE=$?
 
 # Assume this script is one dir below.
 BASEDIR=$(cd "$(dirname "$0")/.."; pwd -P)
 
-# Start default docker-machine on boot.
+# Failure is not an option.
+set -e
+
+# Create the vm if it doesn't exits (dumbed down from docker quickstart).
+if [ $VM_EXISTS_CODE -eq 1 ]; then
+  docker-machine create -d virtualbox --virtualbox-memory 2048 --virtualbox-disk-size 204800 "${VM}"
+fi
+
+# Start docker-machine on boot.
 cp "$BASEDIR"/macOS/com.docker.machine.default.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/com.docker.machine.default.plist
 
 # Set up networking
-docker-machine stop
 echo "Enabling bridged network interface"
-VBoxManage modifyvm default --nic3 bridged --bridgeadapter3 en0 --nictype3 82540EM --cableconnected3 on
-docker-machine start
+docker-machine stop "$VM"
+VBoxManage modifyvm "$VM" --nic3 bridged --bridgeadapter3 en0 --nictype3 82540EM --cableconnected3 on
+docker-machine start "$VM"
 
 # Start and Init docker-compose services
 cd "$BASEDIR"
-eval $(docker-machine env)
+eval $(docker-machine env "$VM")
 docker-compose up -d --build
 
