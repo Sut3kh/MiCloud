@@ -11,9 +11,7 @@
         <string>com.sut3kh.micloud</string>
         <key>ProgramArguments</key>
         <array>
-            <string>/usr/local/bin/docker-machine</string>
-            <string>start</string>
-            <string>MiCloud</string>
+            <string>/usr/local/bin/start-micloud</string>
         </array>
         <key>RunAtLoad</key>
         <true/>

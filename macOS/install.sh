@@ -25,6 +25,9 @@ if [ $VM_EXISTS_CODE -eq 1 ]; then
   docker-machine create -d virtualbox --virtualbox-memory 2048 --virtualbox-disk-size 204800 "${VM}"
 fi
 
+# Install start script.
+ln -s "$BASEDIR"/start.sh /usr/local/bin/start-micloud
+
 # Start docker-machine on boot.
 cp "$BASEDIR"/macOS/com.sut3kh.micloud.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/com.sut3kh.micloud.plist
@@ -33,7 +36,7 @@ launchctl load ~/Library/LaunchAgents/com.sut3kh.micloud.plist
 echo "Enabling bridged network interface"
 docker-machine stop "$VM"
 VBoxManage modifyvm "$VM" --nic3 bridged --bridgeadapter3 "$HOST_INTERFACE" --nictype3 82540EM --cableconnected3 on
-docker-machine start "$VM"
+"$BASEDIR"/start.sh
 
 # Start and Init docker-compose services
 cd "$BASEDIR"
