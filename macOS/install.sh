@@ -26,8 +26,8 @@ if [ $VM_EXISTS_CODE -eq 1 ]; then
 fi
 
 # Start docker-machine on boot.
-cp "$BASEDIR"/macOS/com.docker.machine.default.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.docker.machine.default.plist
+cp "$BASEDIR"/macOS/com.sut3kh.micloud.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.sut3kh.micloud.plist
 
 # Set up networking
 echo "Enabling bridged network interface"
