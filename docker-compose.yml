@@ -15,5 +15,4 @@ services:
     environment:
       ServerIP: 192.168.1.253
     volumes:
-      - './data/micloud:/etc/micloud'
       - './data/pihole:/etc/pihole'

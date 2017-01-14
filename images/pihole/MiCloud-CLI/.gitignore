@@ -1,0 +1,2 @@
+# Ignore composer packages (only used for dev).
+vendor

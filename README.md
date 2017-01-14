@@ -26,6 +26,6 @@ ip=$(
 ## TODO
 
 - Pi-hole Auto update (https://github.com/diginc/docker-pi-hole#running-pi-hole-docker)
-- Create cli to add/remove hosts
+- Add micloud & pihole command wrappers to host $PATH
 - DHCP
-- maybe chroot bind (yum install bind-chroot)
+- Make IP configurable
