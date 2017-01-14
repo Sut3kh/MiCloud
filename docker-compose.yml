@@ -17,4 +17,3 @@ services:
     volumes:
       - './data/micloud:/etc/micloud'
       - './data/pihole:/etc/pihole'
-      - './data/pihole.log:/var/log/pihole.log'
