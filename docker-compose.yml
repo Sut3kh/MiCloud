@@ -1,11 +1,35 @@
 version: '2'
 
 services:
-  named:
+  named: # This must be 1st to attempt to ensure named is 172.28.0.2.
     container_name: named
     restart: always
     build: images/bind
-    ports:
-    - "53:53/udp"
-    - "53:53/tcp"
 
+  pihole:
+    container_name: pihole
+    restart: always
+    image: diginc/pi-hole:alpine_ph-2.9.5_admin-1.4.4.2
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      ServerIP: 192.168.1.253
+      DNS1: 172.28.0.2
+      DNS2: 8.8.8.8
+    depends_on:
+      - named # This is true but also an attempt to ensure named is 172.28.0.2.
+    volumes:
+      - './data/pihole:/etc/pihole'
+      - './data/pihole.log:/var/log/pihole.log'
+
+networks:
+  default:
+    ipam:
+      config:
+      - subnet: 172.28.0.0/16
+        ip_range: 172.28.5.0/24
+        gateway: 172.28.5.254

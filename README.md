@@ -1,5 +1,7 @@
 ## Install
 
+**IMPORTANT:** Due to limitations with docker-machine, must be installed on root hard drive.
+
 - Install docker-compose, docker-machine, docker & virtualbox (or docker toolbox)
 - Create docker-machine default (or run docker quickstart)
 - Run `./macOS/install.sh`
@@ -23,6 +25,7 @@ ip=$(
 
 ## TODO
 
-- Pi-hole
+- Pi-hole Auto update (https://github.com/diginc/docker-pi-hole#running-pi-hole-docker)
+- Create cli to add/remove hosts
 - DHCP
 - maybe chroot bind (yum install bind-chroot)

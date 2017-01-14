@@ -32,6 +32,9 @@ ln -s "$BASEDIR"/start.sh /usr/local/bin/start-micloud
 cp "$BASEDIR"/macOS/com.sut3kh.micloud.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/com.sut3kh.micloud.plist
 
+# Create the log for pi-hole because it is a bit special.
+touch "$BASEDIR"/data/pihole.log
+
 # Set up networking
 echo "Enabling bridged network interface"
 docker-machine stop "$VM"
