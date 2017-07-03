@@ -1,11 +1,6 @@
 ## Install
 
-**IMPORTANT:** Due to limitations with docker-machine, must be installed on root hard drive.
-
-- Install docker-compose, docker-machine, docker & virtualbox (or docker toolbox)
-- Create docker-machine default (or run docker quickstart)
-- Run `./macOS/install.sh`
-  - To use a host network adapter other than eth0: `./macOS/install.sh eth1`
+- Install docker-compose, run `docker-compose up -d`
 
 ## Test
 
@@ -27,5 +22,4 @@ ip=$(
 
 - Pi-hole Auto update (https://github.com/diginc/docker-pi-hole#running-pi-hole-docker)
 - Add micloud & pihole command wrappers to host $PATH
-- DHCP
 - Make IP configurable
