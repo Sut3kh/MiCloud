@@ -13,6 +13,57 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      ServerIP: 192.168.1.253
+      ServerIP: 192.168.6.200
     volumes:
-      - './data/pihole:/etc/pihole'
+      - './data/pihole:/etc/pihole:Z'
+    networks:
+      no_mans_lan:
+        ipv4_address: 192.168.6.200
+    hostname: pihole.micloud.local
+
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: on-failure
+    volumes:
+      - /media/plex/config:/config:Z
+      - /media/plex/transcode:/transcode:Z
+      - /media/plex/data:/data:Z
+    networks:
+      no_mans_lan:
+        ipv4_address: 192.168.6.201
+    hostname: plex.micloud.local
+    environment:
+      TZ: Europe/London
+      HOSTNAME: plex.micloud.local
+      PLEX_UID: 1001
+      PLEX_GID: 1001
+
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    restart: on-failure
+    volumes:
+      - /media/transmission/config:/config:Z
+      - /media/transmission/downloads:/downloads:Z
+      - /media/transmission/watch:/watch:Z
+    hostname: transmission.micloud.local
+    environment:
+      TZ: Europe/London
+      PGID: 1001
+      PUID: 1001
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+
+networks:
+  no_mans_lan:
+    driver: macvlan
+    driver_opts:
+      parent: enp1s0
+    ipam:
+      config:
+        - subnet: 192.168.6.0/24
+          gateway: 192.168.6.1
+          ip_range: 192.168.6.200/29
