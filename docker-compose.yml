@@ -57,6 +57,15 @@ services:
       - 51413:51413
       - 51413:51413/udp
 
+  handbrake:
+    build: images/handbrake-server
+    restart: on-failure
+    ports:
+      - "8181:8181"
+    volumes:
+      - /media/handbrake:/handbrake/input:Z
+      - /media/plex/data:/handbrake/output:Z
+
 networks:
   no_mans_lan:
     driver: macvlan
