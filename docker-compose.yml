@@ -59,7 +59,7 @@ services:
 
   handbrake:
     build: images/handbrake-server
-    container_name: transmission
+    container_name: handbrake
     restart: on-failure
     hostname: handbrake.micloud.local
     ports:
