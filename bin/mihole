@@ -1,0 +1,3 @@
+#!/bin/bash
+docker exec -ti pihole /usr/local/bin/micloud $@
+
