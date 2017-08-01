@@ -17,7 +17,6 @@ services:
       VIRTUAL_HOST: pihole.micloud.local
     volumes:
       - './data/pihole/config:/etc/pihole:Z'
-      - './data/pihole/dnsmasq.d:/etc/dnsmasq.d:Z'
     networks:
       no_mans_lan:
         ipv4_address: 192.168.6.200
