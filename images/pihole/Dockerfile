@@ -14,10 +14,9 @@ RUN apk add --update php7 php7-phar php7-json php7-openssl php7-mbstring php7-cu
 # Copy config overrides.
 COPY etc /etc
 
-# Install MiCloud CLI.
-ADD MiCloud-CLI /usr/local/micloud
-RUN cd /usr/local/micloud \
+# Install MiHole CLI.
+ADD MiHole-CLI /usr/local/mihole
+RUN cd /usr/local/mihole \
   && composer install \
   && cd /usr/local/bin \
-  && ln -s /usr/local/micloud/micloud.php micloud
-
+  && ln -s /usr/local/mihole/mihole.php mihole

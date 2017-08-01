@@ -1,30 +1,39 @@
 <?php
 
-namespace MiCloud\Command;
+namespace MiHole\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use MiCloud\Hosts;
+use MiHole\Hosts;
 
 /**
  * Console Command: add-hostnames.
  */
-class RemoveIP extends Command {
+class AddHostnames extends Command {
 
   /**
    * {@inheritdoc}
    */
   protected function configure() {
     $this
-      ->setName('ip:remove')
-      ->setDescription('Removes all hostname DNS entries for an IP.')
+      ->setName('host:add')
+      ->setDescription('Adds a DNS entry to map hostnames to an IP.')
+      ->setHelp("This command adds hostnames to dnsmasq."
+        . "\nMultiple hostnames can be specified i.e."
+        . "\nadd-hostnames 1.2.3.4 'test.com www.test.com'"
+      )
+      ->setAliases(['add'])
       ->addArgument(
         'ip',
         InputArgument::REQUIRED,
-        'The IP to remove.'
+        'The IP to map the hostnames to.'
+      )
+      ->addArgument(
+        'hostnames',
+        InputArgument::REQUIRED,
+        'The hostname(s) to map to the IP.'
       )
     ;
   }
@@ -36,24 +45,13 @@ class RemoveIP extends Command {
   {
     // Process Args.
     $ip = $input->getArgument('ip');
+    $hostnames = explode(' ', $input->getArgument('hostnames'));
 
-    // Load the hosts.
+    // Add the hostnames.
     $hosts = Hosts::load();
-
-    // Get confirmation.
-    $q_helper = $this->getHelper('question');
-    $question = new ConfirmationQuestion(
-      'Are you sure you want to remove "' . $hosts->getHostEntry($ip) . '"? [y/n]: '
-    );
-
-    if (!$q_helper->ask($input, $output, $question)) {
-      return;
-    }
-
-    // Remove the IP.
-    $hosts->removeIP($ip);
+    $hosts->addHostnames($ip, $hostnames);
     $hosts->save();
-    $output->writeln("Removed all DNS entries for $ip");
+    $output->writeln("Added DNS entry $ip " . implode(' ', $hostnames));
 
     // Reload dnsmasq.
     exec('pihole restartdns', $null, $retval);

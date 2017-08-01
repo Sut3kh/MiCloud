@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Main entrypoint for the MiCloud CLI.
+ * Main entrypoint for the MiHole CLI.
  */
 
 // Use composer's autoloader.
@@ -13,7 +13,7 @@ use MiCloud\Command\RemoveHostnames;
 use MiCloud\Command\RemoveIP;
 
 // Init the Symfony Console Application.
-$app = new Application('MiCloud CLI', '1.0.0');
+$app = new Application('MiHole CLI', '1.0.0');
 
 // Register commands.
 $app->add(new AddHostnames());

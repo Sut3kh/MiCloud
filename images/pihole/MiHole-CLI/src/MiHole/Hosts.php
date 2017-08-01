@@ -1,6 +1,6 @@
 <?php
 
-namespace MiCloud;
+namespace MiHole;
 
 /**
  * Wrapper class to read and write the custom hosts file.
@@ -11,7 +11,7 @@ class Hosts {
    * @var string HOSTS_PATH
    *  The filepath to the custom hosts file loaded by dnsmasq.
    */
-  const HOSTS_PATH = '/etc/pihole/micloud_hosts';
+  const HOSTS_PATH = '/etc/pihole/mihole_hosts';
 
   /**
    * @var array $hosts
@@ -191,9 +191,9 @@ class Hosts {
   /**
    * Load the custom hosts file from HOSTS_PATH.
    *
-   * @return Micloud\Hosts
+   * @return MiHole\Hosts
    *
-   * @throws Micloud\Exception\CannotReadHostsException
+   * @throws MiHole\Exception\CannotReadHostsException
    */
   public static function load() {
     $hosts = new static();
