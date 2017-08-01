@@ -16,7 +16,7 @@ services:
       ServerIP: 192.168.6.200
       VIRTUAL_HOST: pihole.micloud.local
     volumes:
-      - './data/pihole/config:/etc/pihole:Z'
+      - './data/pihole:/etc/pihole:Z'
     networks:
       no_mans_lan:
         ipv4_address: 192.168.6.200
