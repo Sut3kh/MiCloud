@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use MiHole\Hosts;
 
 /**
- * Console Command: add-hostnames.
+ * Console Command: ip:remove.
  */
 class RemoveIP extends Command {
 

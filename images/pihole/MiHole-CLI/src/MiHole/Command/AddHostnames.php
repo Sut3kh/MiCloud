@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use MiHole\Hosts;
 
 /**
- * Console Command: add-hostnames.
+ * Console Command: host:add.
  */
 class AddHostnames extends Command {
 
@@ -22,7 +22,7 @@ class AddHostnames extends Command {
       ->setDescription('Adds a DNS entry to map hostnames to an IP.')
       ->setHelp("This command adds hostnames to dnsmasq."
         . "\nMultiple hostnames can be specified i.e."
-        . "\nadd-hostnames 1.2.3.4 'test.com www.test.com'"
+        . "\nhost:add 1.2.3.4 'test.com www.test.com'"
       )
       ->setAliases(['add'])
       ->addArgument(

@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use MiHole\Hosts;
 
 /**
- * Console Command: add-hostnames.
+ * Console Command: host:remove.
  */
 class RemoveHostnames extends Command {
 
@@ -22,7 +22,7 @@ class RemoveHostnames extends Command {
       ->setDescription('Removes hostnames from a IP DNS entry.')
       ->setHelp("This command removes hostnames from dnsmasq."
         . "\nMultiple hostnames can be specified i.e."
-        . "\nadd-hostnames 1.2.3.4 'test.com www.test.com'"
+        . "\nhost:remove 1.2.3.4 'test.com www.test.com'"
       )
       ->setAliases(['remove'])
       ->addArgument(

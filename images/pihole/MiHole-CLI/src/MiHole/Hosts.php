@@ -192,8 +192,6 @@ class Hosts {
    * Load the custom hosts file from HOSTS_PATH.
    *
    * @return MiHole\Hosts
-   *
-   * @throws MiHole\Exception\CannotReadHostsException
    */
   public static function load() {
     $hosts = new static();
