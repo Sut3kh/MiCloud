@@ -7,7 +7,7 @@ RUN apt-get update \
 
 # Download && install handbrake server.
 RUN cd /usr/local \
-  && git clone https://github.com/berkod/handbrake-server.git \
+  && git clone https://github.com/Sut3kh/handbrake-server.git \
   && cd handbrake-server \
   && npm install
 
