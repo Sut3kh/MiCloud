@@ -8,9 +8,9 @@
 require __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use MiCloud\Command\AddHostnames;
-use MiCloud\Command\RemoveHostnames;
-use MiCloud\Command\RemoveIP;
+use MiHole\Command\AddHostnames;
+use MiHole\Command\RemoveHostnames;
+use MiHole\Command\RemoveIP;
 
 // Init the Symfony Console Application.
 $app = new Application('MiHole CLI', '1.0.0');
