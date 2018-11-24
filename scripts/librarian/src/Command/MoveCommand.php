@@ -145,7 +145,7 @@ class MoveCommand extends Command {
 
     // Sort by season, disc, title.
     uasort($episodes, function (Episode $a, Episode $b) {
-      foreach (['Season', 'Disc', 'Title'] as $prop) {
+      foreach (['Season', 'SeasonPart', 'Disc', 'Title'] as $prop) {
         $cmp = ($a->{$prop} <=> $b->{$prop});
         if ($cmp !== 0) {
           return $cmp;

@@ -8,8 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PatternMatcher {
 
   public const PATTERNS = [
-    // Battlestar_Galactica_Season_4_0_\(Disc_1\)_t00.mkv
-    '/^(?P<Show>.+)_Season_(?P<Season>\d)_\d_\(Disc_(?P<Disc>\d)\)_t(?P<Title>\d{1,2})\.[^.]+$/i',
+    // Battlestar_Galactica_Season_4_5_\(Disc_1\)_t00.mkv
+    '/^(?P<Show>.+)_Season_(?P<Season>\d)_(?:(?P<SeasonPart>\d)_)?\(Disc_(?P<Disc>\d)\)_t(?P<Title>\d{1,2})\.[^.]+$/i',
   ];
 
   /**
@@ -35,6 +35,7 @@ class PatternMatcher {
     $episode = new Episode();
     $episode->Show = str_replace(['.', '_'], ' ', $matches['Show']);
     $episode->Season = (int) $matches['Season'];
+    $episode->SeasonPart = (int) $matches['SeasonPart'];
     $episode->Disc = (int) $matches['Disc'];
     $episode->Title = (int) $matches['Title'];
     return $episode;

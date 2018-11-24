@@ -17,6 +17,11 @@ class Episode {
   /**
    * @var int
    */
+  public $SeasonPart;
+
+  /**
+   * @var int
+   */
   public $Disc;
 
   /**
