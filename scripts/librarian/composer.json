@@ -1,0 +1,10 @@
+{
+    "require": {
+        "php": "^7.2",
+        "symfony/console": "^4.1",
+        "symfony/finder": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {"MiCloud\\Librarian\\": "src/"}
+    }
+}
