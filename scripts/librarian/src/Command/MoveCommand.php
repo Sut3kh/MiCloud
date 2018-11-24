@@ -158,7 +158,7 @@ class MoveCommand extends Command {
     $operations = [];
     foreach ($episodes as $source => $episode) {
       // Build the new filename.
-      $new_name = strtr('{Show}.S{Season}.E{Episode}.{Ext}', [
+      $new_name = strtr('{Show}.S{Season}E{Episode}.{Ext}', [
         '{Show}' => str_replace(' ', '.', $episode->Show),
         '{Season}' => str_pad($episode->Season, 2, '0', STR_PAD_LEFT),
         '{Episode}' => str_pad($episode_num++, 2, '0', STR_PAD_LEFT),
