@@ -16,7 +16,7 @@ use Symfony\Component\Finder\Finder;
 
 class MoveCommand extends Command {
 
-  public const DESTINATION = '/media/plex/data';
+  public const DESTINATION = '/media/plex/data/TV';
 
   protected function configure() {
     $this
