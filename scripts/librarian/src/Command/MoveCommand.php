@@ -51,6 +51,7 @@ class MoveCommand extends Command {
     $episode_num = (int) $input->getOption('episode');
 
     // Scan the directory and build a list of matching episodes.
+    /** @var \MiCloud\Librarian\Episode[] $episodes */
     $episodes = [];
     $pattern = NULL;
     $finder = new Finder();
@@ -158,6 +159,9 @@ class MoveCommand extends Command {
     $operations = [];
     foreach ($episodes as $source => $episode) {
       // Build the new filename.
+      if (isset($episode->Episode)) {
+        $episode_num = $episode->Episode;
+      }
       $new_name = strtr('{Show}.S{Season}E{Episode}.{Ext}', [
         '{Show}' => str_replace(' ', '.', $episode->Show),
         '{Season}' => str_pad($episode->Season, 2, '0', STR_PAD_LEFT),

@@ -15,17 +15,22 @@ class Episode {
   public $Season;
 
   /**
-   * @var int
+   * @var int|NULL
    */
   public $SeasonPart;
 
   /**
-   * @var int
+   * @var int|NULL
+   */
+  public $Episode;
+
+  /**
+   * @var int|NULL
    */
   public $Disc;
 
   /**
-   * @var int
+   * @var int|NULL
    */
   public $Title;
 

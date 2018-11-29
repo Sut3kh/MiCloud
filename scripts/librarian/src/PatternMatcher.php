@@ -10,6 +10,8 @@ class PatternMatcher {
   public const PATTERNS = [
     // Battlestar_Galactica_Season_4_5_\(Disc_1\)_t00.mkv
     '/^(?P<Show>.+)_Season_(?P<Season>\d)_(?:(?P<SeasonPart>\d)_)?\(Disc_(?P<Disc>\d)\)_t(?P<Title>\d{1,2})\.[^.]+$/i',
+    // Stargate Atlantis Season 04 Episode 01 - Adrift.avi
+    '/^(?P<Show>.+) Season (?P<Season>\d+) Episode (?P<Episode>\d+)(?: .+)\.[^.]+$/i'
   ];
 
   /**
@@ -35,9 +37,10 @@ class PatternMatcher {
     $episode = new Episode();
     $episode->Show = str_replace(['.', '_'], ' ', $matches['Show']);
     $episode->Season = (int) $matches['Season'];
-    $episode->SeasonPart = (int) $matches['SeasonPart'];
-    $episode->Disc = (int) $matches['Disc'];
-    $episode->Title = (int) $matches['Title'];
+    $episode->SeasonPart = isset($matches['SeasonPart']) ? (int) $matches['SeasonPart'] : NULL;
+    $episode->Disc = isset($matches['Disc']) ? (int) $matches['Disc'] : NULL;
+    $episode->Title = isset($matches['Title']) ? (int) $matches['Title'] : NULL;
+    $episode->Episode = isset($matches['Episode']) ? (int) $matches['Episode'] : NULL;
     return $episode;
   }
 
